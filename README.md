@@ -35,7 +35,7 @@ We have provided you with some frontend and backend code already, so make sure t
     - Go over the form and make sure nothing is missing.
         
 5. When the sign up form is submitted:
-    - Create an account using email & password using auth. 
+    - Create an account using email & password using auth and saving it in the login_session. 
     - Upload the image to the upload folder (copy the required functions from the flask forms with images slides)
     - Create a dictionary with the email, pasword and the image's filename.
     - Save the dictionary by going to the child `Users` then to the `uid` (login_session["user"]["localId"]) and setting the value there.
