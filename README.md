@@ -13,13 +13,16 @@ By the end of this lab, you will either have a login containing Face Recognition
 In this lab, we'll be creating our very own meet profile with your users uploading the images!  
 We have provided you with some frontend and backend code already, so make sure to clone the repo!  
 
-1. Create and set up a new Firebase project:
+1. Pip install the required library: `face-recognition`
+
+2. Create and set up a new Firebase project:
     1. Go to https://console.firebase.google.com/
     2. Create a new project and name it whatever you'd like.
-    3. Go to Realtime Database and create a database.
-    4. Go to rules and change false to true.
+    3. Go to authentication and set it up.
+    4. Go to Realtime Database and create a database.
+    5. Go to rules and change false to true.
 
-2. Connect the Firebase project to your Flask app:
+3. Connect the Firebase project to your Flask app:
     1. In your Firebase project:
         - Go to project setting and create a web app.
         - Copy the firebaseconfig lines.
@@ -28,11 +31,14 @@ We have provided you with some frontend and backend code already, so make sure t
         - Intialize the firebase using pyrebase.
         - Intialize db using the firebase object.
 
-3. In `add_post.html`, you have a form that contains an input called caption and a submit button:
-    - **Add** the required line to the form tag to be able to accept images.
-    - **Create** an input that you can upload images to.
+4. In `signup.html`, you have a form that contains 3 input (email, password and image) and a submit button:
+    - Go over the form and make sure nothing is missing.
         
-4. Check the `UPLOAD_FOLDER` and see if the needed folder in static are there, if no create them.
+5. When the sign up form is submitted:
+    - Create an account using email & password using auth. 
+    - Upload the image to the upload folder (copy the required functions from the flask forms with images slides)
+    - Create a dictionary with the email, pasword and the image's filename.
+    - Save the dictionary by going to the child `Users` then to the `uid` (login_session["user"]["localId"]) and setting the value there.
 
 5. Uploading images to our directory:
     - Make sure to copy the functions that upload to the directory from the slides.
@@ -48,6 +54,8 @@ Now, after you're done with uploading posts, let's them!
     - In the `/` route get all the posts under the `"Posts"` child, and pass the posts to the html page.
     - Using a **for loop** display all the posts.
 
+## Pytesseract
+### Instructions:
 
 ##### Call an Instructor/TA to check your completed tasks
  
