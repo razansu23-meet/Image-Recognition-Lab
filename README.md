@@ -7,8 +7,8 @@ By the end of this lab, you will either have a login containing Face Recognition
 
 > Before we start, make sure to fork the repo, and clone the code to your machine.
 
-
-## Instructions:
+## Face Recognition
+### Instructions:
 
 In this lab, we'll be creating our very own meet profile with your users uploading the images!  
 We have provided you with some frontend and backend code already, so make sure to clone the repo!  
