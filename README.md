@@ -69,7 +69,7 @@ We have provided you with some frontend and backend code already, so make sure t
 
 3. When the form is submitted (`/translated`):
     - Retrieve the inputs from the form.
-    - Open thge image using PIL.
+    - Open the image using PIL.
     - Using pytesseract get the text from the image.
     
 4. Setting up the translation API:
