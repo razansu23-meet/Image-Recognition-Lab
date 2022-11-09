@@ -10,8 +10,8 @@ By the end of this lab, you will either have a login containing Face Recognition
 ## Face Recognition
 ### Instructions:
 
-In this lab, we'll be creating our very own meet profile with your users uploading the images!  
-We have provided you with some frontend and backend code already, so make sure to clone the repo!  
+In this lab, we'll be creating a signin/signup using face recognition!  
+We have provided you with some frontend and backend (signup) code already, so make sure to clone the repo!  
 
 1. Pip install the required library: `face-recognition`
 
@@ -27,22 +27,19 @@ We have provided you with some frontend and backend code already, so make sure t
         - Go to project setting and create a web app.
         - Copy the firebaseconfig lines.
     2. In the app.py file:
-        - Create a dictionary called config and paste the copied lines (make sure to fix the syntax errors).
-        - Intialize the firebase using pyrebase.
-        - Intialize db using the firebase object.
+        - Paste the copied lines in the config dictionary (make sure to fix the syntax errors).
 
-4. In `signup.html`, you have a form that contains 3 input (email, password and image) and a submit button:
-    - Go over the form and make sure nothing is missing.
+
+4. Go over the `signup` route and `signup.html`, understand the code and the purpose of the function.
         
-5. When the sign up form is submitted:
-    - Create an account using email & password using auth and saving it in the login_session. 
-    - Upload the image to the upload folder (copy the required functions from the flask forms with images slides)
-    - Create a dictionary with the email, pasword and the image's filename.
-    - Save the dictionary by going to the child `Users` then to the `uid` (login_session["user"]["localId"]) and setting the value there.
+5. When the user logs in:
+    - In `login.html` we have 3 inputs: email, password & face.
+    - When the form is submitted:
+        - Log in the user using **authentication** and save it in the `login_session` (don't forget to use try & except).
+        - Retrieve the user's information from the database using the `user's id`, and store it in a dictionary.
+    - Face Recognition:
+        - load the images the user filled in the form and the one stored in the database using the face_recognition library.
 
-5. Uploading images to our directory:
-    - Make sure to copy the functions that upload to the directory from the slides.
-    - In the `/add_post` route get the inputs from the form and upload the image.
 
 6. Saving images in the Realtime Database:
     - after uploading the image, create a dictionary for the post inputs.
