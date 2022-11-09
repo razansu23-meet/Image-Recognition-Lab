@@ -33,23 +33,21 @@ We have provided you with some frontend and backend (signup) code already, so ma
 4. Go over the `signup` route and `signup.html`, understand the code and the purpose of the function.
         
 5. When the user logs in:
-    - In `login.html` we have 3 inputs: email, password & face.
+    - In `login.html` we have 3 inputs: email, password & face (file).
     - When the form is submitted:
         - Log in the user using **authentication** and save it in the `login_session` (don't forget to use try & except).
         - Retrieve the user's information from the database using the `user's id`, and store it in a dictionary.
     - Face Recognition:
         - load the images the user filled in the form and the one stored in the database using the face_recognition library.
+        - Run the `face_encodings` function on both images.
+        - Use `compare_faces` to see if the person in each image is the same.
+        - If the images are the same **redirect** to home, otherwise stay in `login.html`.
 
 
-6. Saving images in the Realtime Database:
-    - after uploading the image, create a dictionary for the post inputs.
-    - **Push** the dictionary under the child `"Posts"`.
-
-Now, after you're done with uploading posts, let's them!
-
-7. Dispalying the posts:
-    - In the `/` route get all the posts under the `"Posts"` child, and pass the posts to the html page.
-    - Using a **for loop** display all the posts.
+6. The home page:
+    - In the home route retrieve the logged in user's infromation from the db.
+    - Display in `home.html` the user's email and image.
+    
 
 ## Pytesseract
 ### Instructions:
