@@ -25,7 +25,11 @@ ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg']
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+	if request.method == "POST":
+
+		return redirect(url_for("home"))
+	else:
+  	return render_template('login.html')
 
 
 @app.route('/home')
