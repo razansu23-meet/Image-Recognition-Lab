@@ -52,6 +52,44 @@ We have provided you with some frontend and backend (signup) code already, so ma
 ## Pytesseract
 ### Instructions:
 
+In this lab, we'll be creating a website that tranlated text from images!  
+We have provided you with some frontend and backend code already, so make sure to clone the repo!
+
+1. Install `tesseract` & `Pytesseract` according to the slides:
+    1. Installing tesseract on linux:
+        - Sudo apt install tesseract-ocr
+    2. Installing required libraries:
+        - python -m pip install --upgrade pip
+        - pip install pytesseract
+        - Pip install Pillow
+        - Pip install numpy
+        - Pip install opencv-python
+        
+2. Go over the form in `form.html` and understand the code (notice which route it submits to).
+
+3. When the form is submitted (`/translated`):
+    - Retrieve the inputs from the form.
+    - Open thge image using PIL.
+    - Using pytesseract get the text from the image.
+    
+4. Setting up the translation API:
+    - Go to https://rapidapi.com/gatzuma/api/deep-translate1/.
+    - Create an account and subscribe to the api.
+    - Change the code from Node.js to **Python** then `Requests`
+    - Copy the url and headers and place them below the importations.
+    
+5. Creating the translation function:
+    - The function should take 2 inputs: The language to translate to & the text.
+    - Copy the payload and respone inside the function, with payload above response.
+    - Replace the value of "q" with the text, and the value of "target" with the intended language.
+    - return `response["data"]["translations"]["translatedText"]`
+    
+6. Continuing in `/translated`:
+    - After taking the text from the image:
+        - Call the translation function with the langauge and text as inputs.
+        - Display the translated text in `translated.html`.
+
+
 ##### Call an Instructor/TA to check your completed tasks
  
 ###### make sure you commit and push your code.
