@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask import session as login_session
 from PIL import Image
 import pytesseract
+import requests
 
 
 app = Flask(  # Create a flask app
