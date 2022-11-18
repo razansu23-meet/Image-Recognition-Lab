@@ -46,13 +46,19 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        photo = request.files['face']
-        upload_file(photo)
+        pic = request.files['face']
+        upload_file(pic)
+        isperson = face_recognition.load_image_file(pic)
+        person_enc = face_recognition.face_encodings(person)[0]
+        isperson_enc = face_recognition.face_encodings(isperson)[0]
+        results = face_recognition.compare_faces([person_enc],person_enc)
         try:
             info = {"email": email,"password" : password, "face": face.filename}
-            db.child("info").push(info)
             login_session['user'] = auth.sign_in_with_email_and_password(email, password)
-            return redirect(url_for('home'))
+            if results== True:
+                return render_template("home.html", results = results)
+            else:
+                return render_template('login.html')
         except:
             error = "Authentication failed"
         return redirect(url_for("home"))
@@ -62,7 +68,8 @@ def login():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    user=db.child("Users").child(login_session['user']['localId'])
+    return render_template('home.html' , user=user)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -76,7 +83,7 @@ def signup():
             login_session['user'] = auth.create_user_with_email_and_password(email, password)
             person = {"email": email, "face": face.filename}
             db.child("Users").child(login_session['user']['localId']).set(person)
-            return redirect(url_for('login'))
+            return render_template('signin.html')
         except:
             return render_template('signup.html')
     else:
