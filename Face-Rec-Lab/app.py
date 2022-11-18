@@ -12,7 +12,24 @@ app = Flask(  # Create a flask app
 
 config = {
 
+  "apiKey": "AIzaSyAqRa2ygwYfrqcmmxHXvMj7ts60p6K0hSA",
+
+  "authDomain": "face-recognition-c42de.firebaseapp.com",
+
+  "databaseURL": "https://face-recognition-c42de-default-rtdb.europe-west1.firebasedatabase.app",
+
+  "projectId": "face-recognition-c42de",
+
+  "storageBucket": "face-recognition-c42de.appspot.com",
+
+  'messagingSenderId': "268174815920",
+
+  "appId": "1:268174815920:web:1b190fb83ba0941abfc175",
+
+  "measurementId": "G-402WFF4X68"
+
 }
+
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
@@ -25,11 +42,22 @@ ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg']
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
-	if request.method == "POST":
-
-		return redirect(url_for("home"))
-	else:
-  	return render_template('login.html')
+    error = ""
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        photo = request.files['face']
+        upload_file(photo)
+        try:
+            info = {"email": email,"password" : password, "face": face.filename}
+            db.child("info").push(info)
+            login_session['user'] = auth.sign_in_with_email_and_password(email, password)
+            return redirect(url_for('home'))
+        except:
+            error = "Authentication failed"
+        return redirect(url_for("home"))
+    else:
+        return render_template('login.html')
 
 
 @app.route('/home')
