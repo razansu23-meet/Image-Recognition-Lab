@@ -38,30 +38,28 @@ db = firebase.database()
 app.config['SECRET_KEY'] = "Your_secret_string"
 UPLOAD_FOLDER = 'static/images/faces'
 ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg']
-
-
+random=face_recognition.load_image_file("static/images/faces/random.jpeg")
 @app.route('/', methods=['GET', 'POST'])
 def login():
     error = ""
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        pic = request.files['face']
-        upload_file(pic)
-        isperson = face_recognition.load_image_file(pic)
-        person_enc = face_recognition.face_encodings(person)[0]
+        face = request.files['face']
+        isperson = face_recognition.load_image_file(face)
+        person_enc = face_recognition.face_encodings(random)[0]
         isperson_enc = face_recognition.face_encodings(isperson)[0]
-        results = face_recognition.compare_faces([person_enc],person_enc)
+        results = face_recognition.compare_faces([person_enc],isperson_enc)
         try:
-            info = {"email": email,"password" : password, "face": face.filename}
+            info = {"email": email,"password" : password, "face": pic.filename}
             login_session['user'] = auth.sign_in_with_email_and_password(email, password)
             if results== True:
-                return render_template("home.html", results = results)
+                return render_template("home.html")
             else:
                 return render_template('login.html')
         except:
             error = "Authentication failed"
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
     else:
         return render_template('login.html')
 
@@ -83,9 +81,9 @@ def signup():
             login_session['user'] = auth.create_user_with_email_and_password(email, password)
             person = {"email": email, "face": face.filename}
             db.child("Users").child(login_session['user']['localId']).set(person)
-            return render_template('signin.html')
+            return redirect(url_for('/'))
         except:
-            return render_template('signup.html')
+            return render_template('login.html')
     else:
         return render_template('signup.html')
 
