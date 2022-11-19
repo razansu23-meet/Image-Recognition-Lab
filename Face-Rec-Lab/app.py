@@ -46,6 +46,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
         face = request.files['face']
+        upload_file(face)
         isperson = face_recognition.load_image_file(face)
         person_enc = face_recognition.face_encodings(random)[0]
         isperson_enc = face_recognition.face_encodings(isperson)[0]
@@ -53,13 +54,13 @@ def login():
         try:
             info = {"email": email,"password" : password, "face": pic.filename}
             login_session['user'] = auth.sign_in_with_email_and_password(email, password)
-            if results== True:
-                return render_template("home.html")
+            if results[0]== True:
+                return render_template('home.html')
             else:
                 return render_template('login.html')
         except:
             error = "Authentication failed"
-        return redirect(url_for("login"))
+            return redirect(url_for("login"))
     else:
         return render_template('login.html')
 
