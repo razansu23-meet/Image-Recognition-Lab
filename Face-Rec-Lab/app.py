@@ -51,11 +51,12 @@ def login():
         person_enc = face_recognition.face_encodings(random)[0]
         isperson_enc = face_recognition.face_encodings(isperson)[0]
         results = face_recognition.compare_faces([person_enc],isperson_enc)
+        print(results)
         try:
-            info = {"email": email,"password" : password, "face": pic.filename}
+            info = {"email": email,"password" : password, "face": face.filename}
             login_session['user'] = auth.sign_in_with_email_and_password(email, password)
             if results[0]== True:
-                return render_template('home.html')
+                return render_template('home.html' , info=info)
             else:
                 return render_template('login.html')
         except:
